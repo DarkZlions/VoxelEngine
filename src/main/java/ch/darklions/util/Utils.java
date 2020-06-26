@@ -1,4 +1,4 @@
-package ch.darklions.voxelengine;
+package ch.darklions.util;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -39,7 +39,7 @@ public class Utils
 		return rand.nextInt(2) == 0 ? -1 : 1;
 	}
 	
-	public static <E extends Object> E[] ListToArray(List<E> listIn) {
+	public static <E extends Object> E[] getArrayFromList(List<E> listIn) {
 		E[]	newArray = (E[]) new Object[listIn.size()];
 		
 		for(int i = 0; i < newArray.length; i++) {

@@ -20,22 +20,8 @@ public class Physic {
 		}
 	}
 	
-	public void collisionDetection(GameItem[] gameItems) {
-		for(GameItem item : gameItems) {
-			int itemPosX = (int) item.getPosition().x;
-			int itemPosY = (int) item.getPosition().y;
-			int itemPosZ = (int) item.getPosition().z;
-			
-			int camPosX = (int) cam.getPosition().x;
-			int camPosY = (int) cam.getPosition().y;
-			int camPosZ = (int) cam.getPosition().z;
-			
-			if(camPosX == itemPosX && camPosY == itemPosY && camPosZ == itemPosZ) {
-				isColliding = true;
-			}else {
-				isColliding = false;
-			}
-		}
+	public void applyTerrainCollision() {
+		
 	}
 	
 }

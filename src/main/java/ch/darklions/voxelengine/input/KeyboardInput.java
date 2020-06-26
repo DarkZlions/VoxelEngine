@@ -24,7 +24,6 @@ public class KeyboardInput {
 		glfwSetKeyCallback(window.getWindowHandle(), (windowHandle, key, scancode, action, mods) -> {
 			this.closeWindowCallback(windowHandle, key, scancode, action, mods);
 			this.toggleCursorLock(windowHandle, key, scancode, action, mods);
-			this.generateNewTerrain(windowHandle, key, scancode, action, mods);
 		});
 	}
 
@@ -62,19 +61,6 @@ public class KeyboardInput {
 			return;
 		if (key == GLFW_KEY_TAB)
 			isCursorLocked = !isCursorLocked;
-	}
-
-	/*
-	 * Generate new Terrain
-	 */
-	private void generateNewTerrain(long windowHandle, int key, int scancode, int action, int mods) {
-
-		if (action == GLFW_RELEASE) {
-			return;
-		}
-		if (key == GLFW_KEY_R) {
-			engine.createNewTerrain();
-		}
 	}
 
 	/*

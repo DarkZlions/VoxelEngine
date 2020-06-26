@@ -1,8 +1,13 @@
 package ch.darklions.main.world;
 
+import java.util.Random;
+
 public class PerlinNoise {
 
-	public static float[][] GenerateWhiteNoise(int width, int height) {																						// testing
+	public float[][] GenerateWhiteNoise(int width, int height) {
+
+		Random random = new Random((long) (Math.round(Math.random() * 100 * Math.random() * 10))); // Seed to 0 for
+																									// testing
 		float[][] noise = new float[width][height];
 
 		for (int i = 0; i < width; i++) {

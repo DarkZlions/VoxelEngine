@@ -2,7 +2,7 @@ package ch.darklions.voxelengine.graph;
 
 import org.joml.Vector3f;
 
-import ch.darklions.voxelengine.Utils;
+import ch.darklions.util.Utils;
 
 public class Camera {
 

@@ -10,7 +10,7 @@ import java.util.List;
 import org.joml.Matrix4f;
 
 import ch.darklions.main.world.Chunk;
-import ch.darklions.voxelengine.Utils;
+import ch.darklions.util.Utils;
 import ch.darklions.voxelengine.Window;
 import ch.darklions.voxelengine.graph.Camera;
 import ch.darklions.voxelengine.graph.ShaderProgram;
@@ -77,7 +77,7 @@ public class Renderer {
 
 		// Render each gameItem
 		for (Chunk chunk : chunks) {
-			if (camera.getPosition().distance(chunk.getPosition()) < camera.getRenderDistance()) {
+			if (camera.getPosition().distance(chunk.getChunkPosition(camera.getPosition().y)) < camera.getRenderDistance()) {
 				chunk.renderVoxels(shaderProgram, transformation, viewMatrix);
 			}
 		}

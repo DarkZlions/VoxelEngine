@@ -5,111 +5,162 @@ import org.joml.Vector3f;
 public class VoxelData {
 	
 	public static final int CHUNK_WIDTH = 16;
-	public static final int CHUNK_HEIGHT = 8;
+	public static final int CHUNK_HEIGHT = 256;
 
+	/*
+	 * Coordinates for each cube face
+	 * "v" stand for "vertices"
+	 */
 	public final static float[][] VOXEL_VERTICES = {
-			// V0
-            {-0.5f, 0.5f, 0.5f,},
-            // V1
-            {-0.5f, -0.5f, 0.5f,},
-            // V2
-            {0.5f, -0.5f, 0.5f,},
-            // V3
-            {0.5f, 0.5f, 0.5f,},
-            // V4
-            {-0.5f, 0.5f, -0.5f,},
-            // V5
-            {0.5f, 0.5f, -0.5f,},
-            // V6
-            {-0.5f, -0.5f, -0.5f,},
-            // V7
-            {0.5f, -0.5f, -0.5f,},
-            
-            // For text coords in top face
-            // V8: V4 repeated
-            {-0.5f, 0.5f, -0.5f,},
-            // V9: V5 repeated
-            {0.5f, 0.5f, -0.5f,},
-            // V10: V0 repeated
-            {-0.5f, 0.5f, 0.5f,},
-            // V11: V3 repeated
-            {0.5f, 0.5f, 0.5f,},
-            
-            // For text coords in right face
-            // V12: V3 repeated
-            {0.5f, 0.5f, 0.5f,},
-            // V13: V2 repeated
-            {0.5f, -0.5f, 0.5f,},
-            
-            // For text coords in left face
-            // V14: V0 repeated
-            {-0.5f, 0.5f, 0.5f,},
-            // V15: V1 repeated
-            {-0.5f, -0.5f, 0.5f,},
-            
-            // For text coords in bottom face
-            // V16: V6 repeated
-            {-0.5f, -0.5f, -0.5f,},
-            // V17: V7 repeated
-            { 0.5f, -0.5f, -0.5f,},
-            // V18: V1 repeated
-            {-0.5f, -0.5f, 0.5f,},
-            // V19: V2 repeated
-            {0.5f, -0.5f, 0.5f,},
+			//front face
+			//v0
+			{-0.5f, 0.5f, 0.5f,
+			//v1
+			-0.5f,-0.5f, 0.5f,
+			//v2
+			0.5f,-0.5f, 0.5f,
+			//v3
+			0.5f, 0.5f, 0.5f,},
+			
+			// BackFace
+			//v4
+			 {-0.5f, 0.5f,-0.5f,
+			//v5
+			 0.5f, 0.5f,-0.5f,
+			//v6
+			-0.5f,-0.5f,-0.5f,
+			//v7
+			0.5f,-0.5f,-0.5f,},
+			
+			//Texture positions:
+			
+			// Top face
+			//v8 = v4
+			{-0.5f, 0.5f,-0.5f,
+			//v9 = v0
+			-0.5f, 0.5f, 0.5f,
+			//v10 = v5
+			 0.5f, 0.5f,-0.5f,
+			//v11 = v3
+			0.5f, 0.5f, 0.5f,},
+			
+			//Bottom face
+			//v12 = v6
+			{-0.5f,-0.5f,-0.5f,
+			//v13 = v1
+			-0.5f,-0.5f, 0.5f,
+			//v14 = v7
+			0.5f,-0.5f,-0.5f,
+			//v15 = v2
+			0.5f,-0.5f, 0.5f,},
+			
+			// Left face
+			//v16 = v4
+			{-0.5f, 0.5f,-0.5f,
+			//v17 = v6
+			-0.5f,-0.5f,-0.5f,
+			//v18 = v0
+			-0.5f, 0.5f, 0.5f,
+			//v19 = v1
+			-0.5f,-0.5f, 0.5f,
+			},
+			
+			// Right face
+			//v20 = v5
+			{0.5f, 0.5f,-0.5f,
+			//v21 = v7
+			0.5f,-0.5f,-0.5f,
+			//v22 = v3
+			0.5f, 0.5f, 0.5f,
+			//v23 = v2
+			0.5f,-0.5f, 0.5f,},
 	};
 	public final static float[][] TEXTURE_POSITIONS = { 
-            {0.0f, 0.0f,},
-            {0.0f, 0.5f,},
-            {0.5f, 0.5f,},
-            {0.5f, 0.0f,},
+            //Front face
+			//Texture vertice order:
+			//top-left -> top-right -> down-left -> down-right
+			{
+			0.0f, 0.0f,
+			0.0f, 0.5f,
+			0.5f, 0.5f,
+			0.5f, 0.0f,
+			},
+			
+			//Back face
+			//Texture vertice order:
+			//top-left -> top-right -> down-left -> down-right
+			{
+			 0.0f, 0.0f,
+			 0.5f, 0.0f,
+			 0.0f, 0.5f,
+			 0.5f, 0.5f,
+			},
+			
+			//Top face = back face
+			{
+			0.0f, 0.5f,
+			0.5f, 0.5f,
+			0.0f, 1.0f,
+			0.5f, 1.0f,
+			},
+			
+			//Bottom face = backface
+			{
+			0.5f, 0.0f,
+			1.0f, 0.0f,
+			0.5f, 0.5f,
+			1.0f, 0.5f,
+			},
+			
+			//Left face = back face
+			//Texture vertice order:
+			//top-right -> down-right -> top-left -> down-left
+			{					
+			0.5f, 0.0f,
+			0.5f, 0.5f,
+			0.0f, 0.0f,
+			0.0f, 0.5f,
+			},
+			
+			//Right face = back face
+			//Texture vertice order:
+			//top-right -> down-right -> top-left -> down-left
+			{
+			0.5f, 0.0f,
+			0.5f, 0.5f,
+			0.0f, 0.0f,
+			0.0f, 0.5f,
+			},
             
-            {0.0f, 0.0f,},
-            {0.5f, 0.0f,},
-            {0.0f, 0.5f,},
-            {0.5f, 0.5f,},
-            
-            // For text coords in top face
-            {0.0f, 0.5f,},
-            {0.5f, 0.5f,},
-            {0.0f, 1.0f,},
-            {0.5f, 1.0f,},
-            
-            // For text coords in right face
-            {0.0f, 0.0f,},
-            {0.0f, 0.5f,},
-            
-            // For text coords in left face
-            {0.5f, 0.0f,},
-            {0.5f, 0.5f,},
-            
-            // For text coords in bottom face
-            {0.5f, 0.0f,},
-            {1.0f, 0.0f,},
-            {0.5f, 0.5f,},
-            { 1.0f, 0.5f,},
-            
-	};
-	public final static int[][] VOXEL_INDICES = {
-            // Front face
-            {0, 1, 3, 3, 1, 2,},
-            // Top Face
-            {8, 10, 11, 9, 8, 11,},
-            // Right face
-            {12, 13, 7, 5, 12, 7,},
-            // Left face
-            {14, 15, 6, 4, 14, 6,},
-            // Bottom face
-            {16, 18, 19, 17, 16, 19,},
-            // Back face
-            {4, 6, 7, 5, 4, 7,},
 	};
 	
+	/*
+	 * Indices for each cube face
+	 */
+	public final static int[][] VOXEL_INDICES = {
+			//Front face
+			{ 0,  1,  3,  3,  1,  2,},
+			//Back face
+			{ 4,  6,  5,  5,  6,  7,},
+			//top face
+			{ 8,  9, 10, 10,  9, 11,},
+			//Bottom face
+			{12, 13, 14, 14, 13, 15,},
+			//Left face
+			{16, 17, 18, 18, 17, 19,},
+			//Right face
+			{20, 21, 22, 22, 21, 23,},
+	};
+	
+	/*
+	 * Each xyz value a plus and minus, to check for each side.
+	 */
 	public static final Vector3f[] FACE_SIDE_CHECKS = {
-			new Vector3f(0, 0, -1.0f),
-			new Vector3f(0, 0,  1.0f),
-			new Vector3f(0, 1.0f,  0),
-			new Vector3f(0, -1.0f, 0),
-			new Vector3f(-1.0f, 0, 0),
-			new Vector3f(1.0f, 0,  0),
+			new Vector3f(0, 0, 1),
+			new Vector3f(0, 0,-1),
+			new Vector3f(0, 1, 0),
+			new Vector3f(0,-1, 0),
+			new Vector3f(1, 0, 0),
+			new Vector3f(-1, 0, 0)
 	};
 }
